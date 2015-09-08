@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Attachment</title>
+	<script>
+		var attachment = "attach";
+		var i = 1;
+		function addInput(){
+			if(i < 10){
+				var attach = attachment + i;
+				if(createInput(attach)) i+=1;
+			}
+		}
+		function deleteInput(){
+			if(i > 1){
+				i -= 1;
+				if (!removeInput()) i+=1;
+			}
+		}
+		function createInput(nm){
+			var aElement = document.createElement("div");
+			var html = "附件("+ i +")： <input type='file"+ i +"' name='FileUpload"+ i +"' title='选择图片' size='45' onchange='javascript:showphote();'><br>" + "<img src='' alt='js用户自定义多文件上传代码' width='0' id='Image"+ i +"' name='Image"+ i +"' title='图片预览' style='margin-left:55px;'>";
+			aElement.innerHTML = html;
+			if(document.getElementById("upload").appendChild(aElement) === null) return false;
+			return true;
+		}
+		function removeInput(nm){
+			var aElement = document.getElementById("upload");
+			if(aElement.removeChild(aElement.lastChild) === null) return false;
+			return true;
+		}
+		function showphoto(){
+			var re = /.(jpg|jpeg|JPG|JPEG)$/;
+			var x = document.getElementById('upload').getElementsByTagName('input');
+			for(r = 0; r < length; r++){
+				if((!re.test(document.getElementById("FileUpload" + [r+1]).value)) && (document.getElementById("FileUpload" + [r+1]).value!="")){
+					alert("只允许上传jpg文件！");
+					document.getElementById("FileUpload" + [r+1]).outerHTML = document.getElementById("FileUpload" + [r+1]).outerHTML.replace("/value=w/g");
+					document.getElementById("Image" + [r+1]).style.width="0px";
+					document.getElementById("Image" + [r+1]).src = "";
+				}else if(document.getElementById('FileUpload' + [r+1]).value!=""){
+					document.getElementById("Image" + [r+1]).style.width = "100px";
+					document.getElementById("Image" + [r+1]).src = document.getElementById("FileUpload" + [r+1]).value;
+				}
+			}
+		}
+		function newInput(){
+			var x = document.getElementById('upload').getElementsByTagName('img');
+			for(r = 0; r < 9; r++){
+				addInput();
+				x[r].width="100";
+				x[r].src = document.getElementById('smPicture').value.replace("sm","sm"+[r+1]);
+			}
+		}
+		window.onload = function(){
+			newInput();
+		}
+	</script>
+</head>
+<body>
+	<input type="button" name="button" value="添加附件" onclick="addInput()" />
+	<input type="button" name="button" value="删除附件" onclick="deleteInput()" />
+	<span id="upload"></span>
+	<input type="hidden" id="smPicture" name="smPicture" value="http:localhost:8080/img/1.jpg" />
+</body>
+</html>

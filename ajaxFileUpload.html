@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<link rel="stylesheet" href="js/AjaxFileUploaderV2.1/ajaxfileupload.css" />
+	<title>Attachment</title>
+	<script src="js/jquery-2.1.3.min.js"></script>
+	<script src="js/AjaxFileUploaderV2.1/ajaxfileupload.js"></script>
+	<script>
+		function ajaxFileUpload() {  
+		    $.ajaxFileUpload({  
+		        url : "http://localhost:8080/uploadFile",   //submit to UploadFileServlet  
+		        secureuri : false,  
+		        fileElementId : 'fileToUpload',  
+		        dataType : 'jpg', //or json xml whatever you like~  
+		        /*success : function(data, status) {  
+		            $("#result").append(data);  
+		        },  
+		        error : function(data, status, e) {  
+		            $("#result").append(data);  
+		        }*/  
+		    });  
+		    return false;  
+		}
+	</script>
+</head>
+<body>
+	<form name="form" action="./UploadFile" method="POST" enctype="multipart/form-data">  
+        <table class="tableForm">  
+            <thead>  
+                <tr>  
+                    <th>JQuery Ajax File Upload</th>  
+                </tr>  
+            </thead>  
+            <tbody>  
+                <tr>  
+                    <td><input id="fileToUpload"  type="file" size="45"   
+                        name="fileToUpload"  class="input"></td>  
+                </tr>  
+            </tbody>  
+            <tfoot>  
+                <tr>  
+                    <td><button class="button" id="buttonUpload"  
+                            onclick="return ajaxFileUpload();">Upload</button></td>  
+                </tr>  
+            </tfoot>  
+        </table>  
+        <div id="result" style="margin-left:200px"></div>  
+    </form>
+</body>
+</html>

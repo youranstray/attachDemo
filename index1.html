@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Atachment</title>
+	<script src="js/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript">
+		var addMore = function(){
+			/*定义元素*/
+			var div = document.getElementById("div2");
+			var br = document.createElement("br");
+			var input = document.createElement("input");
+			var button = document.createElement("input");
+			var button1 = button,
+				button2 = button;
+
+			/*设置元素属性*/
+			input.setAttribute("type", "file");
+			button1.setAttribute("type", "button");
+			//button1.setAttribute("type", "Remove");
+			button1.setAttribute("value", "more");
+			button2.setAttribute("type", "button");
+			//button2.setAttribute("type", "Remove");
+			button2.setAttribute("value", "delete");
+
+			/*监听事件*/
+			button2.onclick = function(){
+				div.removeChild(br);
+				div.removeChild(input);
+				div.removeChild(button1);
+				div.removeChild(button2);
+			}
+
+			div.appendChild(br);
+			div.appendChild(input);
+			//div.appendChild(button1);
+			div.appendChild(button2);
+		}
+	</script>
+</head>
+<body>
+	<div id="div1">
+		<!-- <input type="file" id="upload" /> -->
+		<input type="button" id="btn" value="more" onclick="addMore();" />
+	</div>
+	<div id="div2"></div>
+</body>
+</html>
